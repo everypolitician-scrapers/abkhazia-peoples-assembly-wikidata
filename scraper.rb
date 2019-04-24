@@ -23,4 +23,7 @@ ru_names = EveryPolitician::Wikidata.wikipedia_xpath(
   xpath: '//table[.//th[contains(., "Депутат")]]//tr[td]//td[3]//a[not(@class="new")]/@title',
 )
 
-EveryPolitician::Wikidata.scrape_wikidata(names: { en: en_names | en_names2, ab: ab_names, ru: ru_names })
+sparq = 'SELECT DISTINCT ?item WHERE { ?item p:P39/ps:P39 wd:Q20110697 }'
+ids = EveryPolitician::Wikidata.sparql(sparq)
+
+EveryPolitician::Wikidata.scrape_wikidata(ids: ids, names: { en: en_names | en_names2, ab: ab_names, ru: ru_names })
